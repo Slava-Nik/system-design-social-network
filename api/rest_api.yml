@@ -22,6 +22,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserProfile"
+        404:
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /friends/{userId}:
     get:
@@ -41,7 +49,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            default: 10
+            default: 50
         - in: query
           name: offset
           schema:
@@ -63,6 +71,14 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /friends/{friendId}:
     delete:
@@ -80,6 +96,14 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/SuccessResponse'
+        404:
+          description: Friend not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /friend-requests:
     get:
@@ -93,6 +117,7 @@ paths:
           name: type
           schema:
             type: string
+            default: incoming
             enum:
               - outgoing
               - incoming
@@ -121,6 +146,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/FriendRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /friend-requests/{userId}:
     post:
@@ -139,6 +166,14 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/SuccessResponse'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
 
   /friend-requests/${requestId}:
@@ -157,6 +192,14 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/SuccessResponse'
+        404:
+          description: Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /friend-requests/{requestId}:
     patch:
@@ -186,6 +229,14 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/SuccessResponse'
+        404:
+          description: Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /users/{userId}/feeds:
     get:
@@ -225,7 +276,15 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Post'
-  /feeds/home:
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /feeds/posts:
     get:
       tags:
         - Feeds
@@ -258,6 +317,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Post'
+        500:
+          $ref: '#/components/responses/InternalServerError'
     post:
       tags:
         - Feeds
@@ -277,11 +338,32 @@ paths:
                 mediaIds:
                   type: array
                   items:
-                    type: string
+                    $ref: '#/components/schemas/Media'
 
       responses:
         200:
           $ref: '#/components/responses/SuccessResponse'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+
+  /feeds/posts/{postId}:
+    delete:
+      tags:
+        - Feeds
+      summary: Delete a post
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
 
 
@@ -339,6 +421,31 @@ paths:
         500:
           $ref: '#/components/responses/InternalServerError'
 
+  /media/{mediaId}:
+    delete:
+      tags:
+        - Media
+      summary: Delete media file
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: mediaId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        404:
+          description: Media not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+
 
   /chats:
     get:
@@ -391,6 +498,8 @@ paths:
                 id: "2"
                 title: "New Chat"
                 lastMessage: null
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
   /chats/{chatId}:
     get:
@@ -427,6 +536,14 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Message'
+        404:
+          description: Chat not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundError'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
     post:
       tags:
@@ -450,7 +567,7 @@ paths:
                 content:
                   type: string
       responses:
-        201:
+        200:
           description: Message sent successfully
           content:
             application/json:
@@ -461,6 +578,8 @@ paths:
                     type: string
                   timestamp:
                     type: integer
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
 
 components:
@@ -498,6 +617,16 @@ components:
           default: 0
         total:
           type: integer
+
+    Media:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        url:
+          type: string
 
     User:
       type: object
@@ -558,7 +687,7 @@ components:
         mediaUrls:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Media'
         timestamp:
           type: integer
 
@@ -589,7 +718,7 @@ components:
         mediaUrls:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Media'
       required:
         - authorId
         - content
@@ -601,6 +730,13 @@ components:
 
     BadRequest:
       description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    NotFoundError:
+      description: Not found
       content:
         application/json:
           schema:
