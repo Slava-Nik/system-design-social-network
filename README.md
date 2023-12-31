@@ -146,13 +146,41 @@ This project is dedicated to crafting a robust system design for a social networ
 - **Maximum Users in a Chat:**
   - A chat can accommodate a maximum of 1000 members to maintain effective communication.
 
+  
+
+
+## Architecture:
+
+I used C4 model to demonstrate my design. I used C1, C2 levels in this architecture as they cover overall
+  architecture and systems
+
+Explanation of this model can be found [here](https://c4model.com/)
+
+
+
+* C1 level
+
+![C1](./architectureAsCode/architectureImages/c1.png)
+
+
+* C2 level. (Click to open a bigger image for a better quality). For more details see in-depth
+  architecture of each system below:
+  
+![C2](./architectureAsCode/architectureImages/c2.png)
+
+
+* C2 level per system
+  * users: ![C3_users](./architectureAsCode/architectureImages/c2_users.png)
+  * posts: ![C3_users](./architectureAsCode/architectureImages/c2_posts.png)
+  * chats/messages: ![C3_users](./architectureAsCode/architectureImages/c2_chats.png)
+
 
 
 ## Basic calculations
 
 
 #### RPS (Chat):
-    
+
     DAU = 50 000 000
     Each user reads 20 messages per day
     Each user sends 5 messages per day
@@ -220,4 +248,3 @@ This project is dedicated to crafting a robust system design for a social networ
     
     Amount of disk slots on server: 8
     Number of shards: 130 / 8  = 16
-    
