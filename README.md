@@ -163,7 +163,7 @@ Explanation of this model can be found [here](https://c4model.com/)
 ![C1](./architectureAsCode/architectureImages/c1.png)
 
 
-* C2 level. (Click to open a bigger image for a better quality). For more details see in-depth
+* C2 level. For more details see in-depth
   architecture of each system below:
   
 ![C2](./architectureAsCode/architectureImages/c2.png)
