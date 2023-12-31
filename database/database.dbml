@@ -61,19 +61,6 @@ Table post {
 }
 
 
-Table hashtags {
-  id integer [pk]
-  title string
-}
-
-Table posts_hashtags {
-  id integer [pk]
-  post_id integer
-  hashtag_id integer
-}
-
-
-
 Table media {
   id integer [pk]
   post_id integer [ref: > post.id]
@@ -148,10 +135,6 @@ Ref: "post"."id" < "comment"."post_id"
 Ref: "user"."id" < "like"."author_id"
 
 Ref: "post"."id" < "like"."post_id"
-
-Ref: "post"."id" < "posts_hashtags"."post_id"
-
-Ref: "hashtags"."id" < "posts_hashtags"."hashtag_id"
 
 Ref: "chat_room"."id" < "chat_rooms_users"."chat_room_id"
 
