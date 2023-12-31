@@ -16,7 +16,7 @@ System_Boundary(dataCenters, "Data Centers") {
     System(dc3System, "Similar system in DC3")
 }
 
-System(apiGateway, "API Gateway", "API Gateway to proxy the traffic into the internal network + plays role of SSO")
+System(apiGateway, "API Gateway", "API Gateway to proxy the traffic into the internal network")
 
 System_Boundary(innerNetwork, "Inner network (K8S cluster)") {
     Container(relationService, "Relations service", "JS/Go/Python")

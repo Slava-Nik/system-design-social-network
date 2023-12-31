@@ -2,7 +2,7 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 Person(user, "User", "User of the social network who has an account")
-System(apiGateway, "API Gateway", "API Gateway to proxy the traffic into the internal network + plays role of SSO")
+System(apiGateway, "API Gateway", "API Gateway to proxy the traffic into the internal network")
 
 System_Boundary(innerNetwork, "Inner network (K8S cluster). Area: Chat System.") {
     Container(chat, "Chat service", "JS/Go/Python", "Responsible for writing logic in the chats")
