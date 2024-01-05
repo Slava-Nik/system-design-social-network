@@ -173,19 +173,24 @@ Explanation of this model can be found [here](https://c4model.com/)
   * users: ![C3_users](./architectureAsCode/architectureImages/c2_users.png)
   * posts: ![C3_users](./architectureAsCode/architectureImages/c2_posts.png)
   * chats/messages: ![C3_users](./architectureAsCode/architectureImages/c2_chats.png)
+  * media: ![C3_media](./architectureAsCode/architectureImages/c2_media.png) 
 
 
 
 ## Basic calculations
 
 
-#### RPS (Chat):
+#### Chats calculations:
+
 
     DAU = 50 000 000
     Each user reads 20 messages per day
     Each user sends 5 messages per day
 
     RPS (read) = 50 000 000 * 20 / 86 400  ~= 11574 r/s
+
+    
+
     RPS (write) = 50 000 000 * 5 / 86 400 ~= 2894 r/s
 
 
@@ -215,7 +220,7 @@ Explanation of this model can be found [here](https://c4model.com/)
     Number of shards: 167 / 8  = 21
 
 
-#### RPS (Posts):
+#### Posts calculations:
 
     DAU = 50 000 000
     Each user views 10 posts per day
