@@ -5,6 +5,9 @@ Welcome to my personal repository for the System Design course.
 
 This project is dedicated to crafting a robust system design for a social network platform, emphasizing: high-load, fault-tolerance, performance, and scalability.
 
+## Open API Documentation
+* [Swagger Hub](https://app.swaggerhub.com/apis/NISSAN65/Social_Network_API/1.0.0)
+* [YAML file](api/rest_api.yml)
 
 ## Functional requirements:
 
@@ -170,10 +173,22 @@ Explanation of this model can be found [here](https://c4model.com/)
 
 
 * C2 level per system
-  * users: ![C3_users](./architectureAsCode/architectureImages/c2_users.png)
-  * posts: ![C3_users](./architectureAsCode/architectureImages/c2_posts.png)
-  * chats/messages: ![C3_users](./architectureAsCode/architectureImages/c2_chats.png)
-  * media: ![C3_media](./architectureAsCode/architectureImages/c2_media.png) 
+
+* users:
+
+ ![C3_users](./architectureAsCode/architectureImages/c2_users.png)
+
+* posts:
+
+![C3_users](./architectureAsCode/architectureImages/c2_posts.png)
+
+* chats/messages:
+
+![C3_users](./architectureAsCode/architectureImages/c2_chats.png)
+
+* media:
+
+![C3_media](./architectureAsCode/architectureImages/c2_media.png)
 
 
 
